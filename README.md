@@ -9,3 +9,10 @@
 <li>docker-compose init: <code>docker-compose up airflow-init</code></li>
 <li>docker-compose up: <code>docker-compose up</code></li>
 </ol>
+<h2>Airflow Main Topics</h2>
+<p>All of these topics are distributed in each corresponding directory with its own documentation.</p>
+<ul type="square">
+<li><a href="./airflow-dags/dags.md">DAGs</a></li>
+<li>Tasks</li>
+<li>Sensors</li>
+</ul>
