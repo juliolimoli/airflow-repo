@@ -5,6 +5,7 @@
 <li>What's a DAG?</li>
 <li>How to create DAGs?</li>
 <li>DAGs parameters</li>
+<li>Tasks dependencies inside a DAG</li>
 </ul>
 <h2>What's a DAG?</h2>
 <p>A DAG (Directed Acyclic Graph) is the core concept of Airflow, collecting Tasks together, organized with dependencies and relationships to say how they should run.</p> 
@@ -180,7 +181,7 @@ Fails currently running tasks when task in DAG fails. Warning: A fail stop dag c
 </li>
 </ul>
 
-<h2>Task dependencies inside a DAG</h2>
+<h2>Tasks dependencies inside a DAG</h2>
 <p>A Task/Operator does not usually live alone; it has dependencies on other tasks (those upstream of it), and other tasks depend on it (those downstream of it). Declaring these dependencies between tasks is what makes up the DAG structure (the edges of the directed acyclic graph).</p>
 <p>There are two main ways to declare individual task dependencies:</p>
 <ol>
@@ -224,4 +225,4 @@ Fails currently running tasks when task in DAG fails. Warning: A fail stop dag c
 </ol>
 </ol>
 
-<sup>1</sup><a link="https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html">TimeTables</a>
+<sup>1</sup><a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html">TimeTables</a>
