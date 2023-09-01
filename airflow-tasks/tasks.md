@@ -4,6 +4,11 @@
 <ul>
 <li>What's a Task?</li>
 <li>Types of Tasks</li>
+<ul>
+<li>Operators</li>
+<li>Sensors</li>
+<li>TaskFlow-decorated <code>@task</code></li>
+</ul>
 <li>Tasks Relationships/Dependencies</li>
 <li>Task Instances</li>
 <li>Timeouts</li>
@@ -22,6 +27,15 @@
 <li><b>TaskFlow-decorated <code>@task</code>:</b> a custom Python function packaged up as a Task.</li>
 </ul>
 <p>Internally, these are all actually subclasses of Airflow’s <code>BaseOperator</code>, and the concepts of Task and Operator are somewhat interchangeable, but it’s useful to think of them as separate concepts - essentially, Operators and Sensors are templates, and when you call one in a DAG file, you’re making a Task.</p>
+<h3>Operators</h3>
+<h4>PythonOperator<sup>1</sup></h4>
+<p>Use the <code>@task</code> decorator to execute Python callables.</p>
+<h4>BashOperator</h4>
+<p>Use the BashOperator to execute commands in a Bash shell.</p>
+<h4>EmailOperator</h4>
+<p></p>
+<h4>BranchDateTimeOperator</h4>
+<h4>BranchPythonOperator</h4>
 
 <h2>Tasks Relationships/Dependencies</h2>
 <p>The key part of using Tasks is defining how they relate to each other - their dependencies, or as we say in Airflow, their upstream and downstream tasks. You declare your Tasks first, and then you declare their dependencies second.</p>
@@ -129,3 +143,5 @@ These can be useful if your code has extra knowledge about its environment and w
 <li>Zombie tasks are tasks that are supposed to be running but suddenly died (e.g. their process was killed, or the machine died). Airflow will find these periodically, clean them up, and either fail or retry the task depending on its settings.</li>
 <li>Undead tasks are tasks that are not supposed to be running but are, often caused when you manually edit Task Instances via the UI. Airflow will find them periodically and terminate them.</li>
 </ul>
+
+<sup>1</sup><span><a href="https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html">PythonOperator</a></span>
