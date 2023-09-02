@@ -36,6 +36,7 @@
 <p></p>
 <h4>BranchDateTimeOperator</h4>
 <h4>BranchPythonOperator</h4>
+<p>A workflow can “branch” or follow a path after the execution of this task.</p>
 
 <h2>Tasks Relationships/Dependencies</h2>
 <p>The key part of using Tasks is defining how they relate to each other - their dependencies, or as we say in Airflow, their upstream and downstream tasks. You declare your Tasks first, and then you declare their dependencies second.</p>
