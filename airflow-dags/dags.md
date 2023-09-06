@@ -5,6 +5,12 @@
 <li>What's a DAG?</li>
 <li>How to create DAGs?</li>
 <li>DAGs parameters</li>
+<li>DAGs Dependencies</li>
+<ul>
+<li>TriggerDAGRunOperator</li>
+<li>ExternalTaskSensor</li>
+<li>Datasets</li>
+</ul>
 <li>Tasks dependencies inside a DAG</li>
 </ul>
 <h2>What's a DAG?</h2>
@@ -224,5 +230,21 @@ Fails currently running tasks when task in DAG fails. Warning: A fail stop dag c
 </code>
 </ol>
 </ol>
+
+<h3>TriggerDAGRunOperator</h3>
+<p>Gives the ability to trigger a DAG from another DAG.</p>
+<p>The ideal scenario is to keep all tasks inside the same DAG, but sometimes, it's not recommended (even being a good practice), due to the size or complexity of the DAG. So, maybe it might be a good idea to modularize the macro data pipeline into a set of micro data pipelines. Then, you need something to trigger the other DAG.</p>
+<p>The concept is pretty much the same of the tasks down/up streams.</p>
+<p>Another reasons that forces to "break" the DAG into DAGs could be:</p>
+<p>- There are two DAGs that are dependent on each other, but owned by two different teams.</p>
+<p>- There are two DAGs that are dependent on each other, but run on different schedules.</p>
+<p>- One DAG waits for another DAG to update data before running.</p>
+
+<h3>Datasets</h3>
+<p>Create a DAG dependency through Dataset.</p>
+
+<h3>ExternalTaskSensor</h3>
+<p>Waits for an specific task thats in another DAG.</p>
+
 
 <sup>1</sup><a href="https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html">TimeTables</a>

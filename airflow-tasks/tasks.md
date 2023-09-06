@@ -1,5 +1,9 @@
 <h1>Airflow Tasks</h1>
 
+<div style="text-align: center; font-size: 8px;">
+    <span>If you want to see about Dynamic Tasks: </span><span><b><a href="./dynamic_tasks.md">Click Here</a></b></span>
+</div>
+
 <h2>Topics</h2>
 <ul>
 <li>What's a Task?</li>
@@ -14,6 +18,7 @@
 <li>Timeouts</li>
 <li>Special Exceptions</li>
 <li>Zombie/Undead Tasks</li>
+<li>Deferrable Operators</li>
 </ul>
 
 <h2>What's a Task?</h2>
@@ -37,6 +42,11 @@
 <h4>BranchDateTimeOperator</h4>
 <h4>BranchPythonOperator</h4>
 <p>A workflow can “branch” or follow a path after the execution of this task.</p>
+
+<h4>ExternalPythonOperator</h4>
+<p>The Airflow provides some built in libraries and tools that can help when the common PythonOperator is used. Sometimes, it's necessary to use some different tools or libraries that is not built in, some it might be necessary develop your own operator, that can point to a virtual environment built by yourself, totally customized.</p>
+<p>The operator takes Python binary as python parameter. Note, that even in case of virtual environment, the python path should point to the python binary inside the virtual environment (usually in bin subdirectory of the virtual environment). Contrary to regular use of virtual environment, there is no need for activation of the environment. Merely using python binary automatically activates it. In both examples below PATH_TO_PYTHON_BINARY is such a path, pointing to the executable Python binary.</p>
+<p style="background-color: #000; color: yellow;">Unfortunately Airflow does not support serializing var and ti / task_instance due to incompatibilities with the underlying library. For Airflow context variables make sure that Airflow is also installed as part of the virtualenv environment in the same version as the Airflow version the task is run on. Otherwise you won’t have access to the most context variables of Airflow in op_kwargs.</p>
 
 <h2>Tasks Relationships/Dependencies</h2>
 <p>The key part of using Tasks is defining how they relate to each other - their dependencies, or as we say in Airflow, their upstream and downstream tasks. You declare your Tasks first, and then you declare their dependencies second.</p>
@@ -144,5 +154,10 @@ These can be useful if your code has extra knowledge about its environment and w
 <li>Zombie tasks are tasks that are supposed to be running but suddenly died (e.g. their process was killed, or the machine died). Airflow will find these periodically, clean them up, and either fail or retry the task depending on its settings.</li>
 <li>Undead tasks are tasks that are not supposed to be running but are, often caused when you manually edit Task Instances via the UI. Airflow will find them periodically and terminate them.</li>
 </ul>
+
+<h2>Deferrable Operators</h2>
+<p>First, let's understand what happens in a task process: the scheduler submits a task to the executor -> then a worker executes the tasks until it completes.</p>
+<p>This makes sense and works well if your task is actually doing something, such as: sending a request, a query, processing data, etc.</p> 
+<p>But if the task is waiting for something, like a response, it will leave it working without any need. It gives an opportunity cost.</p>
 
 <sup>1</sup><span><a href="https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html">PythonOperator</a></span>
